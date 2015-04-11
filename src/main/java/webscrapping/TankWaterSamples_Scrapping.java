@@ -64,7 +64,7 @@ public class TankWaterSamples_Scrapping {
 						fecha = sdf.parse(strFecha);
 						sample.setTimeStamp(fecha);
 						
-						sample.setName(data.get(2).text());
+						String name = getTankWaterName(data.get(2).text());
 						
 						Elements dataRows =  data.get(5).getElementsByTag("tr");
 						
@@ -81,8 +81,10 @@ public class TankWaterSamples_Scrapping {
 							}
 						}
 						
-						if (chlorine.compareTo("")!=0 && ph.compareTo("")!=0){
+						if (chlorine.compareTo("")!=0 && ph.compareTo("")!=0 && name.compareTo("")!=0){
 						
+							System.out.println(sample.getName());
+							
 							sampleList.add(sample);
 						}
 					}
@@ -98,5 +100,28 @@ public class TankWaterSamples_Scrapping {
 			// Fallo fecha parser
 			e.printStackTrace();
 		}
+	}
+	
+	private static String getTankWaterName(String name){
+		
+		String tankWaterName = "Depósito de ";
+		
+		if (name.contains("Casablanca")){
+			tankWaterName += "Casablanca";
+		} else if (name.contains("Valdespartera")) {
+			tankWaterName += "Valdespartera";
+		} else if (name.contains("Academia")) {
+			tankWaterName += "Academia";
+		} else if (name.contains("Villarrapa")) {
+			tankWaterName += "Villarrapa";
+		} else if (name.contains("Garrapinillos")){
+			tankWaterName += "Garrapinillos";
+		} else if (name.contains("Alfocea")){
+			tankWaterName += "Alfocea";
+		} else {
+			return "";
+		}
+		
+		return tankWaterName;
 	}
 }

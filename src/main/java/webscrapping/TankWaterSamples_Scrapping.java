@@ -14,6 +14,7 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 
+import data.model.Geolocation;
 import data.model.Sample;
 import data.model.SampleType;
 
@@ -83,7 +84,10 @@ public class TankWaterSamples_Scrapping {
 						
 						if (chlorine.compareTo("")!=0 && ph.compareTo("")!=0 && name.compareTo("")!=0){
 						
-							System.out.println(sample.getName());
+							sample.setChlorine(Float.valueOf(chlorine));
+							sample.setPh(Float.valueOf(ph));
+							sample.setName(name);
+							sample.setGeolocation(getGeolocation(name));
 							
 							sampleList.add(sample);
 						}
@@ -123,5 +127,24 @@ public class TankWaterSamples_Scrapping {
 		}
 		
 		return tankWaterName;
+	}
+	
+	private static Geolocation getGeolocation(String name){
+		
+		if (name.contains("Casablanca")){
+			return new Geolocation(41.63615, -0.918606);
+		} else if (name.contains("Valdespartera")) {
+			return new Geolocation(41.62836, -0.922401);
+		} else if (name.contains("Academia")) {
+			return new Geolocation(41.697625, -0.877336);
+		} else if (name.contains("Villarrapa")) {
+			return new Geolocation(41.739999, -1.066157);
+		} else if (name.contains("Garrapinillos")){
+			return new Geolocation(41.682147, -1.030234);
+		} else if (name.contains("Alfocea")){
+			return new Geolocation(41.702785, -0.970101);
+		} else {
+			return null;
+		}
 	}
 }

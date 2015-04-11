@@ -1,4 +1,4 @@
-# watershare
-Water world watcher
+# Water Share App
+SpaceApps Hackathon Project.
 
-john ok!
+Doc: TO DO

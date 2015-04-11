@@ -5,16 +5,25 @@ import java.util.Date;
 public class Sample {
 	private SampleType type;
 	private Geolocation geolocation;
+	private String name;
 	private float chlorine;
 	private float ph;
 	private float temperature;
 	private Date timeStamp;
 	private float qualityIndex;
 	
-	public Sample(){
-		this.chlorine = -100;
-		this.ph = -100;
-		this.temperature = -100;
+	public Sample(){};
+	
+	public Sample(SampleType type, Geolocation geolocation, String name, float chlorine, 
+			float ph, float temperature, Date timeStamp){
+		
+		this.type = type;
+		this.geolocation = geolocation;
+		this.name = name;
+		this.chlorine = chlorine;
+		this.ph = ph;
+		this.temperature = temperature;
+		this.timeStamp = timeStamp;
 	}
 
 	public SampleType getType() {
@@ -31,6 +40,14 @@ public class Sample {
 
 	public void setGeolocation(Geolocation geolocation) {
 		this.geolocation = geolocation;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public float getChlorine() {

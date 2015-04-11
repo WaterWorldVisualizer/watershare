@@ -1,5 +1,5 @@
 package data.model;
 
 public enum SampleType {
-	EMBALSE, DEPOSITO, GRIFO
+	RESERVOIR_SAMPLE, WATER_TANK_SAMPLE, HOME_SAMPLE
 }

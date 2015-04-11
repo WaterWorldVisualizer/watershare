@@ -11,6 +11,8 @@ dependencies {
    compile 'org.glassfish.jersey.core:jersey-server:2.13'
    compile 'org.glassfish.jersey.containers:jersey-container-servlet:2.13'
    compile 'org.glassfish.jersey.media:jersey-media-moxy:2.13'
+   compile 'org.jsoup:jsoup:1.8.1'
+   
    testCompile 'junit:junit:4.11'
 }
 

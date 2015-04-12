@@ -118,10 +118,12 @@
     map.removeLayer(layers[id+'_heatmap']);
   }
 
+/*
     window.onload = function() {
 
-      mapInit();
+      //mapInit();
 
-      loadLayer('test', '/test2.json', 'red');
+      //loadLayer('test', '/test2.json', 'red');
 
     };
+*/

@@ -8,11 +8,11 @@ public class HeatMapSample {
 	
 	public HeatMapSample(){};
 	
-	public HeatMapSample(double lat, double lng, int cnt) {
+	public HeatMapSample(double lat, double lng, Double cnt) {
 		super();
 		this.lat = lat;
 		this.lng = lng;
-		this.cnt = cnt;
+		this.cnt = cnt.intValue();
 	}
 
 	public double getLat() {

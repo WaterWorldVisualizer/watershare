@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import logic.CalculateWaterQualityIndex;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -99,13 +101,21 @@ public class Reservoir_Scrapping {
 							properties.setPh(pH);
 							properties.setName(name);
 							
-							Feature sample = new Feature(new Geometry(
-									(double[])getGeolocation(img.id().substring(1), "coord")), properties);
+							double[] coords = (double[])getGeolocation(img.id().substring(1), "coord");
+							
+							double[] coords_bis = new double[2];
+							
+							coords_bis[0] = coords[1];
+							coords_bis[1] = coords[0];
+							
+							Feature sample = new Feature(new Geometry(coords_bis), properties);
+							
+							CalculateWaterQualityIndex calcQuality = new CalculateWaterQualityIndex();
 							
 							HeatMapSample heat_map_sample = new HeatMapSample(
-									(double)getGeolocation(img.id().substring(1), "lat"),
-									(double)getGeolocation(img.id().substring(1), "lng"), 
-									Integer.valueOf((int) Math.round((Math.random()*10))));
+									(double)getGeolocation(img.id().substring(1), "lng"),
+									(double)getGeolocation(img.id().substring(1), "lat"), 
+									calcQuality.calculate(pH, 0.0, temp, "origin"));
 							
 							sampleList.add(sample);
 							heatsampleList.add(heat_map_sample);
@@ -151,6 +161,7 @@ public class Reservoir_Scrapping {
 
 		double[] coordinates;
 
+		//Coordenadas (long,lat)
 		switch(id){
 		case "901":
 			coordinates = new double[]{-2.95429550869151, 42.6895157586749};
@@ -233,9 +244,9 @@ public class Reservoir_Scrapping {
 
 		switch(opt){
 		case "lat":
-			return coordinates[0];
-		case "lng":
 			return coordinates[1];
+		case "lng":
+			return coordinates[0];
 		case "coord":
 			return coordinates;
 		}

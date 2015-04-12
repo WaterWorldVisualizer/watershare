@@ -19,6 +19,8 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 
+import logic.*;
+
 import data.model.Feature;
 import data.model.Geometry;
 import data.model.HeatMapSample;
@@ -112,17 +114,20 @@ public class TankWaterSamples_Scrapping {
 						if (chlorine.compareTo("")!=0 && ph.compareTo("")!=0 && name.compareTo("")!=0){
 						
 							properties.setType(type);
-							properties.setChlorine(Float.valueOf(chlorine));
-							properties.setPh(Float.valueOf(ph));
+							properties.setChlorine(Double.valueOf(chlorine));
+							properties.setPh(Double.valueOf(ph));
 							properties.setName(name);
-							properties.setTemperature(calculateMockTemperature());
+							double temp = calculateMockTemperature();
+							properties.setTemperature(temp);
 							
 							Feature sample = new Feature(new Geometry(
 									(double[])getGeolocation(name, "coord")),properties);
 							
+							CalculateWaterQualityIndex calcQuality = new CalculateWaterQualityIndex();
+							
 							HeatMapSample heat_map_sample = new HeatMapSample((double)getGeolocation(name, "lat")
 									, (double)getGeolocation(name, "lng"), 
-									Integer.valueOf((int) Math.round((Math.random()*10))));
+									calcQuality.calculate(Float.valueOf(ph), Float.valueOf(chlorine), temp, "endpoint"));
 							
 							sampleList.add(sample);
 							heatsampleList.add(heat_map_sample);
@@ -194,6 +199,7 @@ public class TankWaterSamples_Scrapping {
 		
 		double[] coordinates;
 		
+		//Coordenadas(lat,lng)
 		if (name.contains("Casablanca")){
 			coordinates = new double[]{41.63615, -0.918606};
 		} else if (name.contains("Valdespartera")) {

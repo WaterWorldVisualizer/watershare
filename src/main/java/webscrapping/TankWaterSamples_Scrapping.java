@@ -4,9 +4,6 @@ package webscrapping;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;*/
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -39,16 +36,10 @@ public class TankWaterSamples_Scrapping {
 	
 	
 	/*  METHODS  */
-	
-	public static void main(String[] args){
-		getSampleHistorial();
-	}
-	
-	
 	/**
 	 * Get the last sample of the day
 	 */
-	public static void getLastSample(){
+	public void getLastSample(){
 		//TODO: We would need real time data in order to accomplish this
 		//		Get the last sample data of the day for every tank water from the page with web scrapping
 	}
@@ -56,7 +47,7 @@ public class TankWaterSamples_Scrapping {
 	/**
 	 *   Get all the existing samples for water tanks
 	 */
-	public static String[] getSampleHistorial(){
+	public String[] getSampleHistorial(){
 		try {
 			
 			SampleType type = SampleType.WATER_TANK_SAMPLE;
@@ -149,10 +140,10 @@ public class TankWaterSamples_Scrapping {
 			fos.flush();
 			fos.close();
 			
-			*/BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
 			bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
 			
-			bw.close();
+			bw.close();*/
 			
 		} catch (IOException e) {
 			//Fallo JSOUP connect

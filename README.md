@@ -1,4 +1,4 @@
-# watershare
-Water world watcher
+# Water Share App
+SpaceApps2015 Zaragoza (Spain) Hackathon Project.
 
-john ok!
+Doc: TO DO

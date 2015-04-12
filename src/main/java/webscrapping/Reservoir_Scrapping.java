@@ -113,8 +113,8 @@ public class Reservoir_Scrapping {
 							CalculateWaterQualityIndex calcQuality = new CalculateWaterQualityIndex();
 							
 							HeatMapSample heat_map_sample = new HeatMapSample(
-									(double)getGeolocation(img.id().substring(1), "lng"),
-									(double)getGeolocation(img.id().substring(1), "lat"), 
+									(double)getGeolocation(img.id().substring(1), "lat"),
+									(double)getGeolocation(img.id().substring(1), "lng"), 
 									calcQuality.calculate(pH, 0.0, temp, "origin"));
 							
 							sampleList.add(sample);

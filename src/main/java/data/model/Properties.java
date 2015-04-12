@@ -2,9 +2,9 @@ package data.model;
 
 import java.util.Date;
 
-public class Sample {
+public class Properties {
+
 	private SampleType type;
-	private Geolocation geolocation;
 	private String name;
 	private float chlorine;
 	private float ph;
@@ -12,13 +12,12 @@ public class Sample {
 	private Date timeStamp;
 	private float qualityIndex;
 	
-	public Sample(){};
+	public Properties(){};
 	
-	public Sample(SampleType type, Geolocation geolocation, String name, float chlorine, 
+	public Properties(SampleType type, String name, float chlorine, 
 			float ph, float temperature, Date timeStamp){
 		
 		this.type = type;
-		this.geolocation = geolocation;
 		this.name = name;
 		this.chlorine = chlorine;
 		this.ph = ph;
@@ -32,14 +31,6 @@ public class Sample {
 
 	public void setType(SampleType type) {
 		this.type = type;
-	}
-
-	public Geolocation getGeolocation() {
-		return geolocation;
-	}
-
-	public void setGeolocation(Geolocation geolocation) {
-		this.geolocation = geolocation;
 	}
 
 	public String getName() {
@@ -85,23 +76,9 @@ public class Sample {
 	public float getQualityIndex() {
 		return qualityIndex;
 	}
-	
-	public boolean isValid()
-	{
-		boolean validSample = this.chlorine == -100
-						   && this.ph == -100
-			               && this.temperature == -100;
-		
-		if (validSample) {
-			calculateQualityIndex();
-			return true;
-		} else {
-			return false;
-		}
-			
+
+	public void setQualityIndex(float qualityIndex) {
+		this.qualityIndex = qualityIndex;
 	}
 	
-	private void calculateQualityIndex() {
-		// TO DO
-	}
 }

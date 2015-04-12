@@ -103,12 +103,7 @@ public class Reservoir_Scrapping {
 							
 							double[] coords = (double[])getGeolocation(img.id().substring(1), "coord");
 							
-							double[] coords_bis = new double[2];
-							
-							coords_bis[0] = coords[1];
-							coords_bis[1] = coords[0];
-							
-							Feature sample = new Feature(new Geometry(coords_bis), properties);
+							Feature sample = new Feature(new Geometry(coords), properties);
 							
 							CalculateWaterQualityIndex calcQuality = new CalculateWaterQualityIndex();
 							

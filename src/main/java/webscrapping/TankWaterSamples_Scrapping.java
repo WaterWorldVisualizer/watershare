@@ -199,28 +199,28 @@ public class TankWaterSamples_Scrapping {
 		
 		double[] coordinates;
 		
-		//Coordenadas(lat,lng)
+		//Coordenadas(lng,lat)
 		if (name.contains("Casablanca")){
-			coordinates = new double[]{41.63615, -0.918606};
+			coordinates = new double[]{-0.918606, 41.63615};
 		} else if (name.contains("Valdespartera")) {
-			coordinates = new double[]{41.62836, -0.922401};
+			coordinates = new double[]{-0.922401, 41.62836};
 		} else if (name.contains("Academia")) {
-			coordinates = new double[]{41.697625, -0.877336};
+			coordinates = new double[]{-0.877336, 41.697625,};
 		} else if (name.contains("Villarrapa")) {
-			coordinates = new double[]{41.739999, -1.066157};
+			coordinates = new double[]{-1.066157, 41.739999};
 		} else if (name.contains("Garrapinillos")){
-			coordinates = new double[]{41.682147, -1.030234};
+			coordinates = new double[]{-1.030234, 41.682147,};
 		} else if (name.contains("Alfocea")){
-			coordinates = new double[]{41.702785, -0.970101};
+			coordinates = new double[]{-0.970101, 41.702785};
 		} else {
 			return null;
 		}
 		
 		switch(opt){
 		case "lat":
-			return coordinates[0];
-		case "lng":
 			return coordinates[1];
+		case "lng":
+			return coordinates[0];
 		case "coord":
 			return coordinates;
 		}

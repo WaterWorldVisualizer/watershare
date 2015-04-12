@@ -38,6 +38,7 @@
           zoom: 4,
           minZoom:2,
           maxZoom:12,
+          zoomControl:false,
           maxBounds: [[-90, -180],[90, 180]],
           layers: [baseLayer, heatmapLayer]
         });

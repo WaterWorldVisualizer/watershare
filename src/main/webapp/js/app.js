@@ -1,13 +1,16 @@
-var SERVICE_URI = "/watershare/layer/";
+var SERVICE_URI = "/";
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
   mapInit();
   hideSelections();
   initSelector();
-  loadLayer('reservoirs', SERVICE_URI + 'reservoirs', 'red');
-  loadLayer('water_tanks', SERVICE_URI + 'water_tanks', 'blue');
-  //loadLayer('endpoints', SERVICE_URI + 'endpoints', 'green');
+
+loadLayer('test', '/test2.json', 'red');
+
+  loadLayer('reservoirs', SERVICE_URI + 'reservoir_water_data.json', 'red');
+  loadLayer('water_tanks', SERVICE_URI + 'tanks_water_data.json', 'blue');
+  //loadLayer('converted_iber', SERVICE_URI + 'converted_iber.json', 'green');
 });
 
 function hideSelections() {
@@ -26,6 +29,7 @@ function initSelector() {
     $( '#heatmap-selected' ).show();
   });
 
+/*
   $('#samples-selected input').click(function() {
     console.log($(this)[0].value);
     if ($(this).checked){
@@ -43,5 +47,47 @@ function initSelector() {
       hideHeatmap($(this)[0].value);
     }
   });
+*/
+
+  $("#samples-selected input[value='reservoirs']").click(function() {
+    if ($(this).checked){
+      showLayer('reservoirs');
+    }else{
+      hideLayer('reservoirs');
+    }
+  });
+
+  $("#samples-selected input[value='water_tanks']").click(function() {
+    if ($(this).checked){
+      showLayer('water_tanks');
+    }else{
+      hideLayer('water_tanks');
+    }
+  });
+
+  $("#heatmap-selected input[value='reservoirs']").click(function() {
+    if ($(this).checked){
+      showHeatmap('reservoirs');
+    }else{
+      hideHeatmap('reservoirs');
+    }
+  });
+  $("#heatmap-selected input[value='water_tanks']").click(function() {
+    if ($(this).checked){
+      showHeatmap('water_tanks');
+    }else{
+      hideHeatmap('water_tanks');
+    }
+  });
+  /*
+  $("#heatmap-selected input[value='reservoirs']").click(function() {
+    if ($(this).checked){
+      showHeatmap('reservoirs');
+    }else{
+      hideHeatmap('reservoirs');
+    }
+  });
+*/
+
 
 }

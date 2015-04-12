@@ -29,18 +29,15 @@ body {
   border: none;
 }
 
-.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, 
-.btn-primary:hover, .open>.dropdown-toggle.btn-primary, btn-primary {
+#btn-info:hover, #btn-info:active, #btn-info:focus,
+#btn-filter:hover, #btn-filter:active, #btn-filter:focus
+{
   border: none;
 }
 
-.button:hover, .button:active, .button:focus,
-.btn-circle:hover, .btn-circle:active, .btn-circle:focus, 
-.btn:hover, .btn:active, .btn:focus, 
-.btn-default:hover, .btn-default:active, .btn-default:focus, 
-.dropdown-toggle:hover, .dropdown-toggle:active, .dropdown-toggle:focus
-.btn-primary:hover, .btn-primary:active, .btn-primary:focus, 
-.btn-lg:hover, .btn-lg:active, .btn-lg:focus {
+#btn-info .btn-circle:hover, #btn-info .btn-circle:active, #btn-info .btn-circle:focus,
+#btn-filter .btn-circle:hover, #btn-filter .btn-circle:active, #btn-filter .btn-circle:focus
+{
   border: none;
   background: #333;
 }
@@ -52,4 +49,18 @@ body {
 #team-members {
   margin-top: 20px;
   text-align: center;
+}
+
+#filters {
+  position: absolute;
+  top: 0px;
+  left: 85px;
+}
+
+#filters .panel-body {
+  padding: 20px;
+}
+
+.type-selection {
+  margin-top: 30px;
 }

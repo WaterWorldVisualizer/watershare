@@ -25,12 +25,66 @@
   </head>
   <body>
     <div id="btn-filter" class="btn-circle-wrapper">
-      <button class="btn-circle btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn-circle btn btn-primary" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="collapseExample">
         <img src="images/logo.png">
       </button>
-      <div class="collapse" id="collapseExample">
-        <div class="well">
-          Prueba prueba
+      <div class="panel panel-default collapse" id="filters" >
+        <div class="panel-heading"><strong>Filters</strong></div>
+        <div class="panel-body">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+              Visualization Type
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+              <li role="presentation"><a id="samples-selected-opt" role="menuitem" tabindex="-1">Located Samples</a></li>
+              <li role="presentation"><a id="heatmap-selected-opt" role="menuitem" tabindex="-1">Heatmap</a></li>
+            </ul>            
+          </div>
+          
+          
+          <div id="samples-selected" class="type-selection">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" value="reservoirs">
+                Reservoirs
+              </label>
+              <div class="checkbox">
+              <label>
+                <input type="checkbox" value="water_tanks">
+                Water tanks
+              </label>
+            </div>
+              <div class="checkbox">
+              <label>
+                  <input type="checkbox" value="endpoints">
+                  Endpoints
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div id="heatmap-selected" class="type-selection">
+            <div class="radio">
+              <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                Reservoirs
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Water tanks
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                Endpoints
+              </label>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -85,6 +139,6 @@
     <script type="text/javascript" src="js/heatmap.min.js"></script>
     <script type="text/javascript" src="js/leaflet-heatmap.js"></script>
     <script type="text/javascript" src="js/visor.js"></script>
-
+    <script type="text/javascript" src="js/app.js"></script>
   </body>
 </html>

@@ -79,7 +79,12 @@
             }
           }); //.addTo(map);
 
-          geojsonLayer.heatmap=response.heatmap;
+          if(geojsonLayer.heatmap!=undefined){
+            geojsonLayer.heatmap=response.heatmap;
+          }else{
+            geojsonLayer.heatmap=response.heatMapData;
+          }
+          
 
           layers[id]=geojsonLayer;
           showLayer(id);
@@ -118,12 +123,10 @@
     map.removeLayer(layers[id+'_heatmap']);
   }
 
-/*
     window.onload = function() {
 
-      //mapInit();
+      mapInit();
 
-      //loadLayer('test', '/test2.json', 'red');
+      loadLayer('test', '/test2.json', 'red');
 
     };
-*/

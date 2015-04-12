@@ -25,4 +25,23 @@ function initSelector() {
     $( '#samples-selected' ).hide();    
     $( '#heatmap-selected' ).show();
   });
+
+  $('#samples-selected input').click(function() {
+    console.log($(this)[0].value);
+    if ($(this).checked){
+      showLayer($(this)[0].value);
+    }else{
+      hideLayer($(this)[0].value);
+    }
+  });
+
+  $('#heatmap-selected input').click(function() {
+    console.log($(this)[0].value);
+    if ($(this).checked){
+      showHeatmap($(this)[0].value);
+    }else{
+      hideHeatmap($(this)[0].value);
+    }
+  });
+
 }

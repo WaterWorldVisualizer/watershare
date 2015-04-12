@@ -4,6 +4,9 @@ package webscrapping;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;*/
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -36,6 +39,11 @@ public class TankWaterSamples_Scrapping {
 	
 	
 	/*  METHODS  */
+	
+	public static void main(String[] args){
+		getSampleHistorial();
+	}
+	
 	
 	/**
 	 * Get the last sample of the day
@@ -116,7 +124,8 @@ public class TankWaterSamples_Scrapping {
 							Feature sample = new Feature(new Geometry((double[])getGeolocation(name, "coord")),properties);
 							
 							HeatMapSample heat_map_sample = new HeatMapSample((double)getGeolocation(name, "lat")
-									, (double)getGeolocation(name, "lng"), 5);
+									, (double)getGeolocation(name, "lng"), 
+									Integer.valueOf((int) Math.round((Math.random()*10))));
 							
 							sampleList.add(sample);
 							heatsampleList.add(heat_map_sample);
@@ -140,10 +149,10 @@ public class TankWaterSamples_Scrapping {
 			fos.flush();
 			fos.close();
 			
-			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));*/
-			//bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
+			*/BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
+			bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
 			
-			//bw.close();
+			bw.close();
 			
 		} catch (IOException e) {
 			//Fallo JSOUP connect

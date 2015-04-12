@@ -1,12 +1,55 @@
-#header {
-  margin-top: 10px;
-  max-width: 600px;
-  margin: 0 auto;
-  border: 0;
-  border-radius: 15px;
+body {
+  font-family: Roboto;
 }
 
 #map-canvas {
   margin-top: 0;
   height: 665px;
+}
+
+#btn-filter {
+  
+}
+
+#btn-info {
+  right: 0;
+}
+
+.btn-circle-wrapper {
+  margin: 15px;
+  position: absolute;
+  z-index: 100;
+}
+
+.btn-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 32px;
+  background: #333;
+  border: none;
+}
+
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, 
+.btn-primary:hover, .open>.dropdown-toggle.btn-primary, btn-primary {
+  border: none;
+}
+
+.button:hover, .button:active, .button:focus,
+.btn-circle:hover, .btn-circle:active, .btn-circle:focus, 
+.btn:hover, .btn:active, .btn:focus, 
+.btn-default:hover, .btn-default:active, .btn-default:focus, 
+.dropdown-toggle:hover, .dropdown-toggle:active, .dropdown-toggle:focus
+.btn-primary:hover, .btn-primary:active, .btn-primary:focus, 
+.btn-lg:hover, .btn-lg:active, .btn-lg:focus {
+  border: none;
+  background: #333;
+}
+
+.modal {
+  text-align: justify;
+}
+
+#team-members {
+  margin-top: 20px;
+  text-align: center;
 }

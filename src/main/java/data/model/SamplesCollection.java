@@ -6,11 +6,13 @@ public class SamplesCollection {
 
 	private String type = "FeatureCollection";
 	private List<Feature> features;
+	private List<HeatMapSample> heatMapData;
 	
 	public SamplesCollection(){};
 	
-	public SamplesCollection(List<Feature> features){
+	public SamplesCollection(List<Feature> features, List<HeatMapSample> heatMapData){
 		this.features = features;
+		this.heatMapData = heatMapData;
 	}
 
 	public List<Feature> getFeatures() {
@@ -23,6 +25,14 @@ public class SamplesCollection {
 
 	public String getType() {
 		return type;
+	}
+
+	public List<HeatMapSample> getHeatMapData() {
+		return heatMapData;
+	}
+
+	public void setHeatMapData(List<HeatMapSample> heatMapData) {
+		this.heatMapData = heatMapData;
 	}
 	
 }

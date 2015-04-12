@@ -1,5 +1,7 @@
 package rest.watershare;
 
+import java.io.File;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -33,9 +35,23 @@ public class WaterShareService {
 	 * @return a JSON representation of the ToDo List.
 	 */
 	@GET
+	@Path("/layer/{type}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getGreeting() {
-		return "{\"id\":1,\"content\":\"Hello, World!\"}";
+	public String getLayerData(@PathParam("type") String type) {
+		
+		File json;
+		
+		switch(type){
+		case "reservoirs":
+			json = new File(resources)
+			break;
+		case "water_tanks":
+			break;
+		case "endpoints":
+			break;
+			
+		}
+		
 	}
 
 }

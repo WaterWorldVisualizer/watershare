@@ -36,8 +36,12 @@ public class Reservoir_Scrapping {
 
 	}
 
+	
+	public static void main(String[] args){
+		getLastData();
+	}
 
-	public String[] getLastData(){
+	public static String[] getLastData(){
 		try {
 
 			SampleType type = SampleType.RESERVOIR_SAMPLE;
@@ -110,15 +114,27 @@ public class Reservoir_Scrapping {
 				}
 			}
 
-			SamplesCollection samples = new SamplesCollection(sampleList);
-			HeatMapSampleCollection heatMapSamples = new HeatMapSampleCollection(heatsampleList);
-
+			SamplesCollection samples = new SamplesCollection(sampleList, heatsampleList);
+			//HeatMapSampleCollection heatMapSamples = new HeatMapSampleCollection(heatsampleList);
+			
 			Gson gson = new Gson();
-
+			
 			String[] jsons = new String[2];
-
-			jsons[0] = gson.toJson(samples, SamplesCollection.class);
-			jsons[1] = gson.toJson(heatMapSamples, HeatMapSampleCollection.class);
+			
+			String json_samples = gson.toJson(samples, SamplesCollection.class);
+			
+			//jsons[0] = gson.toJson(samples, SamplesCollection.class);
+			//jsons[1] = gson.toJson(heatMapSamples, HeatMapSampleCollection.class);
+			
+			FileOutputStream fos = new FileOutputStream(new File("resources/reservoir_water_data.json"));
+			fos.write(json_samples.getBytes());
+			fos.flush();
+			fos.close();
+			
+			/*BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
+			bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
+			
+			bw.close();*/
 
 		} catch (IOException e) {
 			//Fallo JSOUP connect

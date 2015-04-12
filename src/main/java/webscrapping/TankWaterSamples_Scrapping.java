@@ -1,15 +1,16 @@
 package webscrapping;
 
-/*import java.io.BufferedWriter;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;*/
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -34,6 +35,10 @@ public class TankWaterSamples_Scrapping {
 	//CONSTRUCTOR
 	public TankWaterSamples_Scrapping(){}
 	
+	public static void main(String[] args){
+		getSampleHistorial();
+	}
+	
 	
 	/*  METHODS  */
 	/**
@@ -47,7 +52,7 @@ public class TankWaterSamples_Scrapping {
 	/**
 	 *   Get all the existing samples for water tanks
 	 */
-	public String[] getSampleHistorial(){
+	public static String[] getSampleHistorial(){
 		try {
 			
 			SampleType type = SampleType.WATER_TANK_SAMPLE;
@@ -110,8 +115,10 @@ public class TankWaterSamples_Scrapping {
 							properties.setChlorine(Float.valueOf(chlorine));
 							properties.setPh(Float.valueOf(ph));
 							properties.setName(name);
+							properties.setTemperature(calculateMockTemperature());
 							
-							Feature sample = new Feature(new Geometry((double[])getGeolocation(name, "coord")),properties);
+							Feature sample = new Feature(new Geometry(
+									(double[])getGeolocation(name, "coord")),properties);
 							
 							HeatMapSample heat_map_sample = new HeatMapSample((double)getGeolocation(name, "lat")
 									, (double)getGeolocation(name, "lng"), 
@@ -124,22 +131,24 @@ public class TankWaterSamples_Scrapping {
 				}
 			}
 			
-			SamplesCollection samples = new SamplesCollection(sampleList);
-			HeatMapSampleCollection heatMapSamples = new HeatMapSampleCollection(heatsampleList);
+			SamplesCollection samples = new SamplesCollection(sampleList, heatsampleList);
+			//HeatMapSampleCollection heatMapSamples = new HeatMapSampleCollection(heatsampleList);
 			
 			Gson gson = new Gson();
 			
 			String[] jsons = new String[2];
 			
-			jsons[0] = gson.toJson(samples, SamplesCollection.class);
-			jsons[1] = gson.toJson(heatMapSamples, HeatMapSampleCollection.class);
+			String json_samples = gson.toJson(samples, SamplesCollection.class);
 			
-			/*FileOutputStream fos = new FileOutputStream(new File("resources/tank_waters_samples.json"));
+			//jsons[0] = gson.toJson(samples, SamplesCollection.class);
+			//jsons[1] = gson.toJson(heatMapSamples, HeatMapSampleCollection.class);
+			
+			FileOutputStream fos = new FileOutputStream(new File("resources/tanks_water_data.json"));
 			fos.write(json_samples.getBytes());
 			fos.flush();
 			fos.close();
 			
-			BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
+			/*BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
 			bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
 			
 			bw.close();*/
@@ -210,5 +219,17 @@ public class TankWaterSamples_Scrapping {
 			return coordinates;
 		}
 		return null;
+	}
+	
+	
+	private static double calculateMockTemperature(){
+		
+		Random r = new Random();
+		int Low = 5;
+		int High = 24;
+		int R = r.nextInt(High-Low) + Low;
+		
+		return Double.valueOf(R);
+		
 	}
 }

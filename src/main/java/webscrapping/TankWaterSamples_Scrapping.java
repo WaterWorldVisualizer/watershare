@@ -79,12 +79,11 @@ public class TankWaterSamples_Scrapping {
 						
 						//Fecha de la muestra del embalse
 						
-						String strFecha = data.get(1).text().split(" ")[1];
-						if (strFecha.startsWith("2")){
+						String strDate = data.get(1).text().split(" ")[1];
+						if (strDate.startsWith("2")){
 							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-							Date fecha = null;
-							fecha = sdf.parse(strFecha);
-							properties.setTimeStamp(fecha);
+							Date date = sdf.parse(strDate);
+							properties.setTimeStamp(date);
 						}
 						
 						String name = new String(getTankWaterName(data.get(2).text()).getBytes("UTF-8"));

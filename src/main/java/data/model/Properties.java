@@ -6,16 +6,16 @@ public class Properties {
 
 	private SampleType type;
 	private String name;
-	private float chlorine;
-	private float ph;
-	private float temperature;
+	private double chlorine;
+	private double ph;
+	private double temperature;
 	private Date timeStamp;
-	private float qualityIndex;
+	private double qualityIndex;
 	
 	public Properties(){};
 	
-	public Properties(SampleType type, String name, float chlorine, 
-			float ph, float temperature, Date timeStamp){
+	public Properties(SampleType type, String name, double chlorine, 
+			double ph, double temperature, Date timeStamp){
 		
 		this.type = type;
 		this.name = name;
@@ -41,27 +41,27 @@ public class Properties {
 		this.name = name;
 	}
 
-	public float getChlorine() {
+	public double getChlorine() {
 		return chlorine;
 	}
 
-	public void setChlorine(float chlorine) {
+	public void setChlorine(double chlorine) {
 		this.chlorine = chlorine;
 	}
 
-	public float getPh() {
+	public double getPh() {
 		return ph;
 	}
 
-	public void setPh(float ph) {
+	public void setPh(double ph) {
 		this.ph = ph;
 	}
 
-	public float getTemperature() {
+	public double getTemperature() {
 		return temperature;
 	}
 
-	public void setTemperature(float temperature) {
+	public void setTemperature(double temperature) {
 		this.temperature = temperature;
 	}
 
@@ -73,11 +73,11 @@ public class Properties {
 		this.timeStamp = timeStamp;
 	}
 
-	public float getQualityIndex() {
+	public double getQualityIndex() {
 		return qualityIndex;
 	}
 
-	public void setQualityIndex(float qualityIndex) {
+	public void setQualityIndex(double qualityIndex) {
 		this.qualityIndex = qualityIndex;
 	}
 	

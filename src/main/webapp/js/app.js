@@ -1,4 +1,4 @@
-var SERVICE_URI = "/";
+var SERVICE_URI = "http://localhost:8080/watershare/";
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
@@ -6,11 +6,11 @@ $( document ).ready(function() {
   hideSelections();
   initSelector();
 
-loadLayer('test', '/test2.json', 'red');
+  //loadLayer('test', '/test2.json', 'red');
 
-  loadLayer('reservoirs', SERVICE_URI + 'reservoir_water_data.json', 'red');
-  loadLayer('water_tanks', SERVICE_URI + 'tanks_water_data.json', 'blue');
-  //loadLayer('converted_iber', SERVICE_URI + 'converted_iber.json', 'green');
+  loadLayer('reservoirs', SERVICE_URI + 'layer/reservoirs', 'red');
+  loadLayer('water_tanks', SERVICE_URI + 'layer/water_tanks', 'blue');
+  //loadLayer('endpoints', SERVICE_URI + 'layer/endpoints', 'green');
 });
 
 function hideSelections() {

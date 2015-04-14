@@ -1,5 +1,5 @@
 # Water Share App
-SpaceApps2015 Zaragoza (Spain) Hackathon Project.
+*SpaceApps2015 Zaragoza (Spain) Hackathon Project.*
 
 WaterShare shows drinking water quality around the world and allows anyone who uses the app to visualize data in different ways. It geolocates water data samples on a map, showing their properties (PH, chlorine, temperature...) and represents the water quality through a calculated quality index on a heatmap.
 

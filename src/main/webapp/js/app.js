@@ -5,12 +5,11 @@ $( document ).ready(function() {
   mapInit();
   hideSelections();
   initSelector();
-
-  //loadLayer('test', '/test2.json', 'red');
-
+  
+  loadLayer('endpoints', SERVICE_URI + 'layer/endpoints', 'green');
   loadLayer('reservoirs', SERVICE_URI + 'layer/reservoirs', 'red');
   loadLayer('water_tanks', SERVICE_URI + 'layer/water_tanks', 'blue');
-  //loadLayer('endpoints', SERVICE_URI + 'layer/endpoints', 'green');
+
 });
 
 function hideSelections() {

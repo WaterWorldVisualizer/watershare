@@ -3,8 +3,8 @@ apply plugin: 'eclipse'
 apply plugin: 'war'
 
 war {
-	baseName = 'watershare'
-	version = '1.0'
+	archiveName = 'ROOT.war'
+	destinationDir = file('webapps')
 }
 
 
@@ -20,8 +20,10 @@ dependencies {
    compile 'org.jsoup:jsoup:1.8.1'
    compile 'com.google.code.gson:gson:1.7.2'
    compile 'mysql:mysql-connector-java:5.1.6'
-   
-   testCompile 'junit:junit:4.11'
+}
+
+compileJava { 
+  options.encoding = "UTF-8" 
 }
 
 task server(type: JavaExec) {

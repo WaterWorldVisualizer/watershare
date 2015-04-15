@@ -8,6 +8,7 @@ import java.io.IOException;
 import data.model.*;
 import dbConnection.ReadEndpointSamples;
 
+//import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -31,7 +32,7 @@ public class WaterShareService {
 	 * The (shared) object. 
 	 */
 	//@Inject
-	//ToDoList toDoList;
+	//String json_samples;
 
 	/**
 	 * A GET /todolist request should return the ToDo List in JSON.
@@ -53,8 +54,11 @@ public class WaterShareService {
 
 				samples = gson.fromJson(br, SamplesCollection.class);
 				
+				
 //				Reservoir_Scrapping rs = new Reservoir_Scrapping();
 //				return rs.getLastData();
+				//json_samples = gson.toJson(samples);
+				//return Response.ok().build();
 				return gson.toJson(samples);
 			case "water_tanks":
 				br = new BufferedReader(new FileReader(new File("resources/tanks_water_data.json")));  
@@ -63,23 +67,31 @@ public class WaterShareService {
 				
 //				TankWaterSamples_Scrapping twss = new TankWaterSamples_Scrapping();
 //				return twss.getLastSample();
+				//json_samples = gson.toJson(samples);
+				//return Response.ok().build();
 				return gson.toJson(samples);
 			case "endpoints":
-				/*br = new BufferedReader(new FileReader(new File("resources/endpoints_data.json")));  
+				br = new BufferedReader(new FileReader(new File("resources/endpoints_data.json")));  
 
 				samples = gson.fromJson(br, SamplesCollection.class);
 				
-				return gson.toJson(samples);*/
+				return gson.toJson(samples);
 				
-				ReadEndpointSamples res = new ReadEndpointSamples();
+				//ReadEndpointSamples res = new ReadEndpointSamples();
 				
-				return res.read();
+				//json_samples = res.read();
+				//return Response.ok().build();
+				
+				//return res.read();
 			default:
+				//json_samples = "Layer not available";
+				//return Response.status(500).build();
 				return "Layer not available";
 			}
 		} catch (IOException ioex){
 			ioex.printStackTrace();
-			return "Service Error";
+			//return Response.status(500).build();
+			return "Error service";
 		}
 
 	}

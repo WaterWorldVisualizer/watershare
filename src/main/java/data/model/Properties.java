@@ -11,11 +11,12 @@ public class Properties {
 	private double temperature;
 	private Date timeStamp;
 	private double qualityIndex;
+	private String address;
 	
 	public Properties(){};
 	
 	public Properties(SampleType type, String name, double chlorine, 
-			double ph, double temperature, Date timeStamp){
+			double ph, double temperature, Date timeStamp, double qIndex, String address){
 		
 		this.type = type;
 		this.name = name;
@@ -23,6 +24,8 @@ public class Properties {
 		this.ph = ph;
 		this.temperature = temperature;
 		this.timeStamp = timeStamp;
+		this.qualityIndex = qIndex;
+		this.address = address;
 	}
 
 	public SampleType getType() {
@@ -79,6 +82,14 @@ public class Properties {
 
 	public void setQualityIndex(double qualityIndex) {
 		this.qualityIndex = qualityIndex;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 }

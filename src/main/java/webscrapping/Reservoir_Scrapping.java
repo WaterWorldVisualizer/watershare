@@ -1,9 +1,7 @@
 package webscrapping;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,13 +18,7 @@ import org.jsoup.select.Elements;
 
 import com.google.gson.Gson;
 
-import data.model.Feature;
-import data.model.Geometry;
-import data.model.HeatMapSample;
-import data.model.HeatMapSampleCollection;
-import data.model.Properties;
-import data.model.SampleType;
-import data.model.SamplesCollection;
+import data.model.*;
 
 public class Reservoir_Scrapping {
 
@@ -34,16 +26,17 @@ public class Reservoir_Scrapping {
 	private final static String URI_ficha_base = "http://195.55.247.234/redalerta/ficha.asp?";
 
 
-	public Reservoir_Scrapping(){
-
-	}
-
+	public Reservoir_Scrapping(){}
 	
-	public static void main(String[] args){
-		getLastData();
+	/**
+	 * Get the last sample of the day
+	 */
+	public void getLastSample(){
+		//TODO: We would need real time data in order to accomplish this
+		//		Get the last sample data of the day for every reservoir from the page with web scrapping
 	}
 
-	public static String[] getLastData(){
+	public String getLastData(){
 		try {
 
 			SampleType type = SampleType.RESERVOIR_SAMPLE;
@@ -71,7 +64,7 @@ public class Reservoir_Scrapping {
 					
 					Elements parameters_table = doc.getElementsByTag("table").get(1).getElementsByTag("tr");
 					
-					if (parameters_table.size()>0 && getGeolocation(img.id().substring(1), "coord")!=null){
+					if (parameters_table.size()>0 && this.getGeolocation(img.id().substring(1), "coord")!=null){
 
 						Properties properties = new Properties();
 						strDate = parameters_table.get(0).getElementsByTag("td").get(3).text();
@@ -101,15 +94,15 @@ public class Reservoir_Scrapping {
 							properties.setPh(pH);
 							properties.setName(name);
 							
-							double[] coords = (double[])getGeolocation(img.id().substring(1), "coord");
+							double[] coords = (double[])this.getGeolocation(img.id().substring(1), "coord");
 							
 							Feature sample = new Feature(new Geometry(coords), properties);
 							
 							CalculateWaterQualityIndex calcQuality = new CalculateWaterQualityIndex();
 							
 							HeatMapSample heat_map_sample = new HeatMapSample(
-									(double)getGeolocation(img.id().substring(1), "lat"),
-									(double)getGeolocation(img.id().substring(1), "lng"), 
+									(double)this.getGeolocation(img.id().substring(1), "lat"),
+									(double)this.getGeolocation(img.id().substring(1), "lng"), 
 									calcQuality.calculate(pH, 0.0, temp, "origin"));
 							
 							sampleList.add(sample);
@@ -120,26 +113,17 @@ public class Reservoir_Scrapping {
 			}
 
 			SamplesCollection samples = new SamplesCollection(sampleList, heatsampleList);
-			//HeatMapSampleCollection heatMapSamples = new HeatMapSampleCollection(heatsampleList);
 			
 			Gson gson = new Gson();
 			
-			String[] jsons = new String[2];
-			
 			String json_samples = gson.toJson(samples, SamplesCollection.class);
-			
-			//jsons[0] = gson.toJson(samples, SamplesCollection.class);
-			//jsons[1] = gson.toJson(heatMapSamples, HeatMapSampleCollection.class);
 			
 			FileOutputStream fos = new FileOutputStream(new File("resources/reservoir_water_data.json"));
 			fos.write(json_samples.getBytes());
 			fos.flush();
 			fos.close();
 			
-			/*BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
-			bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
-			
-			bw.close();*/
+			return json_samples;
 
 		} catch (IOException e) {
 			//Fallo JSOUP connect
@@ -152,7 +136,7 @@ public class Reservoir_Scrapping {
 	}
 	
 	//Get the coordinates for every tank water
-	private static Object getGeolocation(String id, String opt){
+	private Object getGeolocation(String id, String opt){
 
 		double[] coordinates;
 

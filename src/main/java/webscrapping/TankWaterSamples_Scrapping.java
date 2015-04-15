@@ -1,9 +1,7 @@
 package webscrapping;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,14 +18,7 @@ import org.jsoup.select.Elements;
 import com.google.gson.Gson;
 
 import logic.*;
-
-import data.model.Feature;
-import data.model.Geometry;
-import data.model.HeatMapSample;
-import data.model.HeatMapSampleCollection;
-import data.model.Properties;
-import data.model.SampleType;
-import data.model.SamplesCollection;
+import data.model.*;
 
 public class TankWaterSamples_Scrapping {
 
@@ -36,11 +27,6 @@ public class TankWaterSamples_Scrapping {
 	
 	//CONSTRUCTOR
 	public TankWaterSamples_Scrapping(){}
-	
-	public static void main(String[] args){
-		getSampleHistorial();
-	}
-	
 	
 	/*  METHODS  */
 	/**
@@ -54,7 +40,7 @@ public class TankWaterSamples_Scrapping {
 	/**
 	 *   Get all the existing samples for water tanks
 	 */
-	public static String[] getSampleHistorial(){
+	public String getSampleHistorial(){
 		try {
 			
 			SampleType type = SampleType.WATER_TANK_SAMPLE;
@@ -93,7 +79,7 @@ public class TankWaterSamples_Scrapping {
 							properties.setTimeStamp(date);
 						}
 						
-						String name = new String(getTankWaterName(data.get(2).text()).getBytes("UTF-8"));
+						String name = new String(this.getTankWaterName(data.get(2).text()).getBytes("UTF-8"));
 						
 						Elements dataRows =  data.get(5).getElementsByTag("tr");
 						
@@ -117,17 +103,17 @@ public class TankWaterSamples_Scrapping {
 							properties.setChlorine(Double.valueOf(chlorine));
 							properties.setPh(Double.valueOf(ph));
 							properties.setName(name);
-							double temp = calculateMockTemperature();
+							double temp = this.calculateMockTemperature();
 							properties.setTemperature(temp);
 							
 							Feature sample = new Feature(new Geometry(
-									(double[])getGeolocation(name, "coord")),properties);
+									(double[])this.getGeolocation(name, "coord")),properties);
 							
 							CalculateWaterQualityIndex calcQuality = new CalculateWaterQualityIndex();
 							
-							HeatMapSample heat_map_sample = new HeatMapSample((double)getGeolocation(name, "lat")
-									, (double)getGeolocation(name, "lng"), 
-									calcQuality.calculate(Float.valueOf(ph), Float.valueOf(chlorine), temp, "endpoint"));
+							HeatMapSample heat_map_sample = new HeatMapSample((double)this.getGeolocation(name, "lat")
+									, (double)this.getGeolocation(name, "lng"), 
+									calcQuality.calculate(Float.valueOf(ph), Float.valueOf(chlorine), temp, "origin"));
 							
 							sampleList.add(sample);
 							heatsampleList.add(heat_map_sample);
@@ -137,26 +123,17 @@ public class TankWaterSamples_Scrapping {
 			}
 			
 			SamplesCollection samples = new SamplesCollection(sampleList, heatsampleList);
-			//HeatMapSampleCollection heatMapSamples = new HeatMapSampleCollection(heatsampleList);
 			
 			Gson gson = new Gson();
 			
-			String[] jsons = new String[2];
-			
 			String json_samples = gson.toJson(samples, SamplesCollection.class);
-			
-			//jsons[0] = gson.toJson(samples, SamplesCollection.class);
-			//jsons[1] = gson.toJson(heatMapSamples, HeatMapSampleCollection.class);
 			
 			FileOutputStream fos = new FileOutputStream(new File("resources/tanks_water_data.json"));
 			fos.write(json_samples.getBytes());
 			fos.flush();
 			fos.close();
 			
-			/*BufferedWriter bw = new BufferedWriter(new FileWriter(new File("resources/tank_waters_heat_map.json")));
-			bw.write(gson.toJson(heatMapSamples, HeatMapSampleCollection.class));
-			
-			bw.close();*/
+			return json_samples;
 			
 		} catch (IOException e) {
 			//Fallo JSOUP connect
@@ -170,7 +147,7 @@ public class TankWaterSamples_Scrapping {
 	
 	
 	//Get the tank water name
-	private static String getTankWaterName(String name){
+	private String getTankWaterName(String name){
 		
 		String tankWaterName = "Depósito de ";
 		
@@ -195,7 +172,7 @@ public class TankWaterSamples_Scrapping {
 	
 	
 	//Get the coordinates for every tank water
-	private static Object getGeolocation(String name, String opt){
+	private Object getGeolocation(String name, String opt){
 		
 		double[] coordinates;
 		
@@ -228,7 +205,7 @@ public class TankWaterSamples_Scrapping {
 	}
 	
 	
-	private static double calculateMockTemperature(){
+	private double calculateMockTemperature(){
 		
 		Random r = new Random();
 		int Low = 5;

@@ -6,12 +6,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import data.model.*;
+import dbConnection.ReadEndpointSamples;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+//import javax.ws.rs.core.Response;
+
+//import webscrapping.Reservoir_Scrapping;
+//import webscrapping.TankWaterSamples_Scrapping;
+
 import com.google.gson.Gson;
 
 /**
@@ -47,12 +53,16 @@ public class WaterShareService {
 
 				samples = gson.fromJson(br, SamplesCollection.class);
 				
+//				Reservoir_Scrapping rs = new Reservoir_Scrapping();
+//				return rs.getLastData();
 				return gson.toJson(samples);
 			case "water_tanks":
 				br = new BufferedReader(new FileReader(new File("resources/tanks_water_data.json")));  
 
 				samples = gson.fromJson(br, SamplesCollection.class);
 				
+//				TankWaterSamples_Scrapping twss = new TankWaterSamples_Scrapping();
+//				return twss.getLastSample();
 				return gson.toJson(samples);
 			case "endpoints":
 				/*br = new BufferedReader(new FileReader(new File("resources/endpoints_data.json")));  

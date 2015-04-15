@@ -55,11 +55,15 @@ public class WaterShareService {
 				
 				return gson.toJson(samples);
 			case "endpoints":
-				br = new BufferedReader(new FileReader(new File("resources/endpoints_data.json")));  
+				/*br = new BufferedReader(new FileReader(new File("resources/endpoints_data.json")));  
 
 				samples = gson.fromJson(br, SamplesCollection.class);
 				
-				return gson.toJson(samples);
+				return gson.toJson(samples);*/
+				
+				ReadEndpointSamples res = new ReadEndpointSamples();
+				
+				return res.read();
 			default:
 				return "Layer not available";
 			}

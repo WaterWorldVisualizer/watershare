@@ -1,4 +1,5 @@
 var SERVICE_URI = "/rest/watershare/";
+//var SERVICE_URI = "http://localhost:8080/";
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
@@ -9,6 +10,9 @@ $( document ).ready(function() {
   loadLayer('endpoints', SERVICE_URI + 'layer/endpoints', 'green');
   loadLayer('reservoirs', SERVICE_URI + 'layer/reservoirs', 'red');
   loadLayer('water_tanks', SERVICE_URI + 'layer/water_tanks', 'blue');
+  /*loadLayer('endpoints', 'resources/endpoints_data.json', 'green');
+   loadLayer('reservoirs', 'resources/reservoir_water_data.json', 'red');
+   loadLayer('water_tanks', 'resources/tanks_water_data.json', 'blue');*/
 
 });
 
@@ -19,37 +23,22 @@ function hideSelections() {
 
 function initSelector() {
   $( '#samples-selected-opt' ).click(function() {
+    $( '#dropdownMenu1').html('Located Samples');
     $( '#heatmap-selected' ).hide();
     $( '#samples-selected' ).show();
   });
   
   $( '#heatmap-selected-opt' ).click(function() {
+    $( '#dropdownMenu1').html('Heatmap');
     $( '#samples-selected' ).hide();    
     $( '#heatmap-selected' ).show();
   });
 
-/*
-  $('#samples-selected input').click(function() {
-    console.log($(this)[0].value);
-    if ($(this).checked){
-      showLayer($(this)[0].value);
-    }else{
-      hideLayer($(this)[0].value);
-    }
-  });
 
-  $('#heatmap-selected input').click(function() {
-    console.log($(this)[0].value);
-    if ($(this).checked){
-      showHeatmap($(this)[0].value);
-    }else{
-      hideHeatmap($(this)[0].value);
-    }
-  });
-*/
 
   $("#samples-selected input[value='reservoirs']").click(function() {
-    if ($(this).checked){
+    console.log($(this));
+    if ($(this)[0].checked){
       showLayer('reservoirs');
     }else{
       hideLayer('reservoirs');
@@ -57,36 +46,43 @@ function initSelector() {
   });
 
   $("#samples-selected input[value='water_tanks']").click(function() {
-    if ($(this).checked){
+    if ($(this)[0].checked){
       showLayer('water_tanks');
     }else{
       hideLayer('water_tanks');
     }
   });
+  $("#samples-selected input[value='endpoints']").click(function() {
+    if ($(this)[0].checked){
+      showLayer('endpoints');
+    }else{
+      hideLayer('endpoints');
+    }
+  });
 
   $("#heatmap-selected input[value='reservoirs']").click(function() {
-    if ($(this).checked){
+    console.log($(this));
+    if ($(this)[0].checked){
       showHeatmap('reservoirs');
     }else{
       hideHeatmap('reservoirs');
     }
   });
   $("#heatmap-selected input[value='water_tanks']").click(function() {
-    if ($(this).checked){
+    if ($(this)[0].checked){
       showHeatmap('water_tanks');
     }else{
       hideHeatmap('water_tanks');
     }
   });
-  /*
-  $("#heatmap-selected input[value='reservoirs']").click(function() {
-    if ($(this).checked){
-      showHeatmap('reservoirs');
+
+  $("#heatmap-selected input[value='endpoints']").click(function() {
+    if ($(this)[0].checked){
+      showHeatmap('endpoints');
     }else{
-      hideHeatmap('reservoirs');
+      hideHeatmap('endpoints');
     }
   });
-*/
 
 
 }

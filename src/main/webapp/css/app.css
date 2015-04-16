@@ -55,6 +55,7 @@ body {
   position: absolute;
   top: 0px;
   left: 85px;
+  width: 200px;
 }
 
 #filters .panel-body {

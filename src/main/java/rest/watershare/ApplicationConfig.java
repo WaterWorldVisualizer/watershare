@@ -4,14 +4,16 @@ import org.eclipse.persistence.jaxb.rs.MOXyJsonProvider;
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import org.glassfish.jersey.server.ResourceConfig;
 
+import data.model.SamplesCollection;
+
 public class ApplicationConfig extends ResourceConfig {
 
 	/**
      * Default constructor
      */
-		 /*
-    public ApplicationConfig() {
-    	//this(new ToDoList());
+
+    /*public ApplicationConfig() {
+    	this(new SamplesCollection());
     }*/
 
 
@@ -19,15 +21,16 @@ public class ApplicationConfig extends ResourceConfig {
      * Main constructor
      * @param addressBook a provided address book
      */
-    public ApplicationConfig(/*final ToDoList toDoList*/) {
+    public ApplicationConfig(/*final SamplesCollection samplesCollection*/) {
     	register(CrossDomainFilter.class);
     	register(WaterShareService.class);
     	register(MOXyJsonProvider.class);
+    	register(SamplesCollection.class);
     	register(new AbstractBinder() {
 
 			@Override
 			protected void configure() {
-				//bind(toDoList).to(ToDoList.class);
+				//bind(samplesCollection).to(SamplesCollection.class);
 			}});
 	}	
 

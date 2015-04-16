@@ -1,5 +1,4 @@
-//var SERVICE_URI = "/rest/watershare/";
-var SERVICE_URI = "http://localhost:8080/watershare/";
+var SERVICE_URI = "/rest/watershare/";
 
 // A $( document ).ready() block.
 $( document ).ready(function() {
@@ -7,7 +6,7 @@ $( document ).ready(function() {
   hideSelections();
   initSelector();
   
-  //loadLayer('endpoints', SERVICE_URI + 'layer/endpoints', 'green');
+  loadLayer('endpoints', SERVICE_URI + 'layer/endpoints', 'green');
   loadLayer('reservoirs', SERVICE_URI + 'layer/reservoirs', 'red');
   loadLayer('water_tanks', SERVICE_URI + 'layer/water_tanks', 'blue');
 

@@ -51,6 +51,7 @@
         url: url,
         dataType: 'json',
         success: function (response) {
+          console.log(response);
           console.log(id+' loaded');
           geojsonLayer = L.geoJson(response, {
             style: function(feature) {

@@ -32,6 +32,10 @@ function initSelector() {
     $( '#dropdownMenu1').html('Heatmap');
     $( '#samples-selected' ).hide();    
     $( '#heatmap-selected' ).show();
+    hideLayer('reservoirs');
+    hideLayer('water_tanks');
+    hideLayer('endpoints');
+    showHeatmap('endpoints');
   });
 
 
@@ -61,8 +65,9 @@ function initSelector() {
   });
 
   $("#heatmap-selected input[value='reservoirs']").click(function() {
-    console.log($(this));
     if ($(this)[0].checked){
+      hideHeatmap('water_tanks');
+      hideHeatmap('endpoints');
       showHeatmap('reservoirs');
     }else{
       hideHeatmap('reservoirs');
@@ -70,7 +75,10 @@ function initSelector() {
   });
   $("#heatmap-selected input[value='water_tanks']").click(function() {
     if ($(this)[0].checked){
+      hideHeatmap('reservoirs');
+      hideHeatmap('endpoints');
       showHeatmap('water_tanks');
+
     }else{
       hideHeatmap('water_tanks');
     }
@@ -78,6 +86,8 @@ function initSelector() {
 
   $("#heatmap-selected input[value='endpoints']").click(function() {
     if ($(this)[0].checked){
+      hideHeatmap('reservoirs');
+      hideHeatmap('water_tanks');
       showHeatmap('endpoints');
     }else{
       hideHeatmap('endpoints');
